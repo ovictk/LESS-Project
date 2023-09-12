@@ -1,0 +1,360 @@
+// GLOBAL
+@global_border-radius: 5px;
+@global_transition: .4s;
+@global_border-width: 1px;
+@global_red: #dd4141;
+@global_green: #20ce62;
+// @global_blue: #dd4141;
+// @global_orallow: #20ce62;
+@global_light_red: #dd41413d;
+@global_light_green: #20ce633d;
+
+// SINGLE OPTIONS
+@br5: 5px;
+@br10: 10px;
+@br1sw: @global_border-width solid #dfdfdf;
+@themeCLR: #2680f5;
+@darkbg: #2b2b2b;
+
+body {
+	background: #eeeeee;
+	padding: 0;
+	margin: 0;
+	input, button, select, textarea { .globalConfig(); }
+	[type="text"], [type="password"], [type="email"] { height: 26px; }
+	[type="submit"], button, select {
+		cursor: pointer;
+		height: 30px;
+		&:hover { background: #3f3f3f; }
+	}
+	select { height: 30px; }
+	* { outline: none; }
+}
+.globalConfig() {
+	border-radius: @global_border-radius;
+	border: @global_border-width solid #3f3f3f;
+	transition: @global_transition;
+}
+.darkmode {
+	background: @darkbg;
+	* { color: #cccccc; }
+	input, button, select, textarea { .globalConfig(); }
+	[type="text"], [type="password"], [type="email"] {
+		height: 26px;
+		background: @darkbg;
+		&:focus { border-color: @themeCLR; }
+	}
+	[type="submit"], button, select {
+		cursor: pointer;
+		height: 30px;
+		background: #3f3f3f;
+		&:hover { background: @darkbg; }
+	}
+}
+
+.required { border: @global_border-width solid @global_red !important; }
+.filled { border: @global_border-width solid @global_green !important; }
+.requiredbg {
+	border: @global_border-width solid @global_red !important;
+	background: #dd41413d !important;
+}
+.filledbg {
+	border: @global_border-width solid @global_green !important;
+	background: #20ce633d !important;
+}
+.reqsvgRequired {
+	.configReqSVGToggle();
+	border-color: @global_red !important;
+	span {
+		.svgX { display: block; }
+		.svgCheck { display: none; }
+		svg { fill: @global_red; }
+	}
+}
+.reqsvgFilled {
+	.configReqSVGToggle();
+	border-color: @global_green !important;
+	span {
+		.svgX { display: none; }
+		.svgCheck { display: block; }
+		svg { fill: @global_green; }
+	}
+}
+.reqsvgRequiredbg {
+	.configReqSVGToggle();
+	background: @global_light_red !important;
+	border-color: @global_red !important;
+	span {
+		.svgX { display: block; }
+		.svgCheck { display: none; }
+		svg { fill: @global_red; }
+	}
+}
+.reqsvgFilledbg {
+	.configReqSVGToggle();
+	color: @global_light_green !important;
+	background: @global_light_green !important;
+	border-color: @global_green !important;
+	span {
+		.svgX { display: none; }
+		.svgCheck { display: block; }
+		svg { fill: @global_green; }
+	}
+}
+.configReqSVG() {
+	width: 232px;
+	content: '';
+	display: inline-block;
+	border: @br1sw;
+	border-radius: @br5;
+	height: 28px !important;
+	.reqsvg, .reqsvgbg {
+		width: 200px;
+		border: none;
+	}
+	span {
+		display: none;
+		height: 20px;
+		width: 20px;
+		position: absolute;
+		padding: 4px;
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}
+.configReqSVGToggle() {
+	span {
+		display: inline-block !important;
+		animation: .4s reqSvg cubic-bezier(0, 0.73, 0.94, 1.1);
+	}
+}
+.inputText {
+	.configReqSVG();
+}
+
+@keyframes reqSvg { 
+	0% {
+		transform: rotateZ(0deg);
+	} 65% {
+		transform: rotateZ(380deg);
+	} 70% {
+		transform: rotateZ(360deg);
+	} 75% {
+		transform: rotateZ(375deg);
+	} 80% {
+		transform: rotateZ(360deg);
+	} 85% {
+		transform: rotateZ(370deg);
+	} 90% {
+		transform: rotateZ(360deg);
+	} 95% {
+		transform: rotateZ(365deg);
+	} 100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+
+// ##############################################################################################
+// ############################### TOGGLE CONFIG ################################################
+// ##############################################################################################
+
+
+#toggleDarktheme {
+	margin: 10px;
+}
+
+// White border 1PX
+.border() {
+  border: @br1sw !important;
+  &:before {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+// ['ON' & 'OFF']
+.toggleText() {
+  &:before {
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+    content: 'OFF' !important;
+  }
+  &:checked{
+    &:before {
+      content: 'ON' !important;
+    }
+  }
+}
+//
+// ##############################################################################################
+////////////////////////////// TOGGLE GREEN-RED
+input[type="checkbox"] {
+ .border();
+//  .toggleText();
+  border-radius: @br10;
+  appearance: none;
+  background: #fd3434;
+  width: 38px;
+  height: 20px;
+  display: grid;
+  transition: .4s;
+  &:before {
+    transition: .4s;
+    border-radius: @br10;
+    background: #e0e0e0;
+    content: '';
+    width: 20px;
+    height: 20px;
+  }
+  &:checked{
+    background: #3db939;
+    margin-left: 20px;
+    transform: scale(1);
+    &:before {
+      margin-left: 18px;
+    }
+  }
+}
+
+// ##############################################################################################
+////////////////////////////// TOGGLE GREEN-WHITE
+// input[type="checkbox"] {
+//   .border();
+//   .toggleText();
+//   border-radius: @br10;
+//   appearance: none;
+//   background: #fff;
+//   width: 38px;
+//   height: 20px;
+//   display: grid;
+//   transition: .4s;
+//   &:before {
+//     transition: .4s;
+//     border-radius: @br10;
+//     background: #cccccc;
+//     content: '';
+//     width: 20px;
+//     height: 20px;
+//   }
+//   &:checked{
+//     background: #3db939;
+//     margin-left: 20px;
+//     transform: scale(1);
+//     &:before {
+//       margin-left: 18px;
+//     }
+//   }
+// }
+
+// ##############################################################################################
+// ############################### DROP DOWN CONFIG #############################################
+// ##############################################################################################
+
+// ##############################################################################################
+////////////////////////////// DROP MENU v1.x 
+// .drop {
+//   .dropconfig();
+//   width: 300px;
+//   border: 1px solid #3f3f3f;
+//   .animateIn {
+//     animation: .4s in cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: visible !important;
+//     opacity: 1 !important;
+//   }
+//   .animateOut {
+//     animation: .4s out cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: hidden;
+//     opacity: 0;
+//   }
+// }
+// @keyframes in {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(30%);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateY(0%);
+//   }
+// }
+// @keyframes out {
+//   0% {
+//     visibility: visible;
+//     opacity: 1;
+//     transform: translateY(0%);
+//   }
+//   100% {
+//     opacity: 0;
+//     transform: translateY(30%);
+//     visibility: hidden;
+//   }
+// }
+
+// ##############################################################################################
+////////////////////////////// DROP MENU v1.0
+// .dropv1 {
+//   .dropconfig();
+//   .animateIn {
+//     animation: .4s in cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: visible !important;
+//     opacity: 1 !important;
+//   }
+//   .animateOut {
+//     animation: .4s out cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: hidden;
+//     opacity: 0;
+//   }
+// }
+// @keyframes in {
+//   0% {
+//     opacity: 0;
+//     transform: translateY(30%);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateY(0%);
+//   }
+// }
+// @keyframes out {
+//   0% {
+//     visibility: visible;
+//     opacity: 1;
+//     transform: translateY(0%);
+//   }
+//   100% {
+//     opacity: 0;
+//     transform: translateY(30%);
+//     visibility: hidden;
+//   }
+// }
+
+// ##############################################################################################
+////////////////////////////// DROP MENU v1.1 - BORDERED 1PX
+// .openDropper {
+//   min-height: 160px;
+//   border-color: #636363 !important;
+//   #dropper {
+//     background: #636363;
+//     height: 40px;
+//     border-bottom: 1px solid #3f3f3f;
+//   }
+// }
+// .drop {
+//   .dropconfig();
+//   width: 300px;
+//   border: 1px solid #3f3f3f;
+//   .animateIn {
+//     animation: .4s in cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: visible !important;
+//     opacity: 1 !important;
+//   }
+//   .animateOut {
+//     animation: .4s out cubic-bezier(0.31, 0.68, 0.41, 0.91);
+//     visibility: hidden;
+//     opacity: 0;
+//   }
+// }
